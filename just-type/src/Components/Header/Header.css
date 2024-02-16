@@ -1,0 +1,50 @@
+.header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 20px;
+	transition: 0.5s;
+}
+
+.header h2{
+	transition: 0.5s;
+	font-size: 24px;
+	line-height: 1;
+	margin: 0;
+}
+
+.header .buttons{
+	display: flex;
+	flex-direction: row;
+	margin-left: 10px;
+}
+
+.header .buttons *{
+	height: 24px;
+	width: 24px;
+	transform-origin: center;
+	cursor: pointer;
+}
+
+.header .row{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+@keyframes gearturn{
+	0%{
+		transform: rotateZ(0deg);
+	}
+	100%{
+		transform: rotateZ(60deg);
+	}
+}
+
+.header.white *{
+	color: white;
+}
+
+.header.black *{
+	color: black;
+}

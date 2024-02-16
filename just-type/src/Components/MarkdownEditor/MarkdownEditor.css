@@ -1,0 +1,46 @@
+.editor{
+	padding: 20px;
+	background: white;
+	margin: 20px;
+	width: calc(100% - 40px);
+	border-radius: 10px;
+	box-sizing: border-box;
+	border: solid var(--editor-border-color) 3px;
+	transition: 0.5s;
+	position: relative;
+	--category: inherit;
+}
+
+.editor:focus{
+	background: var(--editor-color);
+}
+
+.editor ~ .editor{
+	display: none;
+}
+
+.editor *{
+	margin: 0;
+}
+
+.editor::after{
+	content: var(--category);
+	display: block;
+	position: absolute;
+	font-size: 16px;
+	top: -14px;
+	padding: 0px 10px;
+	left: 20px;
+}
+
+.editor::before{
+	content: var(--category);
+	display: block;
+	color: transparent;
+	background: inherit;
+	position: absolute;
+	font-size: 16px;
+	top: -3px;
+	padding: 0px 10px;
+	left: 20px;
+}

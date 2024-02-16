@@ -1,0 +1,27 @@
+.spinner{
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	height: 32px;
+	width: 32px;
+	font-size: 32px;
+	animation: infinite 0.6s spinner;
+	transition: 0.2s;
+}
+
+.spinner.hidden{
+	opacity: 0;
+}
+
+.spinner.showing{
+	opacity: 1;
+}
+
+@keyframes spinner{
+	0%{
+		transform: rotateZ(0deg);
+	}
+	100%{
+		transform: rotateZ(360deg);
+	}
+}
