@@ -24,7 +24,7 @@
 }
 
 .editor::after{
-	content: var(--category);
+	content: attr(data-category);
 	display: block;
 	position: absolute;
 	font-size: 16px;
@@ -34,7 +34,7 @@
 }
 
 .editor::before{
-	content: var(--category);
+	content: attr(data-category);
 	display: block;
 	color: transparent;
 	background: inherit;

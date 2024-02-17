@@ -4,12 +4,24 @@
 	--editor-border-color: rgb(240, 240, 240);
 }
 
-*{
+body *{
 	font-family: 'Nunito', sans-serif;
 	color: black;
+	white-space: pre-wrap;
+	word-wrap: break-word;
 }
 
 body{
 	transition: 0.5s;
 	margin: 0;
+}
+
+button{
+	padding: 10px 20px;
+	cursor: pointer;
+	border-radius: 10px;
+	box-sizing: border-box;
+	background: transparent;
+	border: solid var(--editor-border-color) 3px;
+	transition: 0.5s;
 }

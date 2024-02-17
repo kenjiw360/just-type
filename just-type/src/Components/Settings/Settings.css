@@ -1,0 +1,95 @@
+.settings-page{
+    position: fixed;
+    top: 64px;
+    left: 0;
+    display: block;
+    height: calc(100vh - 64px);
+    width: 100%;
+    background: rgba(0,0,0,0.05);
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 2;
+}
+
+.settings-page > *{
+    cursor:initial;
+}
+
+.settings{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid 3px var(--editor-border-color);
+    border-radius: 10px;
+    width: 600px;
+    height: 400px;
+    background: var(--editor-color);
+    padding: 20px;
+}
+
+.settings-header{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.settings-header > span{
+    margin: 0 10px 0 0;
+    padding: 0 0 2px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.settings-header > span[data-selected="false"]{
+    border-bottom: solid 1px rgb(200,200,200);
+}
+
+.settings-header > span[data-selected="true"]{
+    border-bottom: solid 2px rgb(175,175,175);
+}
+
+.sub-page .category{
+    display: flex;
+    padding: 10px 0px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    transition: 0.5s;
+    padding: 10px;
+}
+
+.sub-page .category:hover{
+    background: rgba(0,0,0,0.03);
+}
+
+.sub-page .category .circle{
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    display: block;
+    margin-right: 5px;
+}
+
+.sub-page .category span.content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sub-page .category span.content > span{
+    font-size: 16px;
+}
+
+.sub-page .category > svg{
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.sub-page .category > svg:hover{
+    background: rgba(0,0,0,0.04);
+}
