@@ -13,12 +13,21 @@ function SettingsHeader({ tabs, selected, setSelected }){
 	)
 }
 
-function CategoriesSubPage({ categories, deleteCategory }){
+function CategoriesSubPage({ categories, setCategories }){
+	var [categoriesInstance, setCategoriesInstance] = useState(categories);
+
+	function deleteCategory(index){
+		var change = [...categories.filter((category, i) => index != i)];
+		setCategories(change);
+		setCategoriesInstance(change);
+		localStorage.setItem("data", JSON.stringify(change));
+	}
+
 	return (
 		<div className='sub-page'>
 			<div>
 				{
-					categories.filter(category => category.name != "No Category").map((category, index) => (
+					categoriesInstance.filter(category => category.name != "No Category").map((category, index) => (
 						<span className='category'>
 							<span className='content'>
 								<div className="circle" style={{ background: category.getColor() }} />
@@ -36,29 +45,24 @@ function CategoriesSubPage({ categories, deleteCategory }){
 function StylingSubPage(){
 	return (
 		<div className='sub-page'>
-			<h1>Styling Settings In Progress</h1>
+			<h1 className='nospace'>Styling Settings In Progress</h1>
 		</div>
 	)
 }
 
 export default function (props){
 	var [selected, setSelected] = useState(0);
-	var [page, setPage] = useState(CategoriesSubPage);
+	var [pages, setPages] = useState([<CategoriesSubPage categories={props.categories} setCategories={props.setCategories} />, <StylingSubPage />]);
 
 	useEffect(function (){
 		document.querySelector(".settings-page").addEventListener("click", e => (e.target == document.querySelector(".settings-page")) && props.setShowSettings(false));
 	}, []);
 
-	function deleteCategory(index){
-		var change = [...props.categories.filter((category, i) => index != i)];
-		props.setCategories(change);
-	}
-
 	return (
 		<div {...props}>
 			<div className="settings">
 				<SettingsHeader tabs={["Categories", "Styling"]} selected={selected} setSelected={setSelected} />
-				{ <page categories={props.categories} deleteCategory={deleteCategory} /> }
+				{ pages[selected] }
 			</div>
 		</div>
 	)

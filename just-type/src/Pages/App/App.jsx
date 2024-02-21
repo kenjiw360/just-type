@@ -2,26 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { VscLoading } from "react-icons/vsc";
 import { FaPlus } from "react-icons/fa";
 
-import Header from './Components/Header/Header.jsx';
-import Settings from './Components/Settings/Settings.jsx';
-import MarkdownEditor from './Components/MarkdownEditor/MarkdownEditor.jsx';
+import Category from '../../Helpers/Category.js';
+
+import Header from '../../Components/Header/Header.jsx';
+import Settings from '../../Components/Settings/Settings.jsx';
+import MarkdownEditor from '../../Components/MarkdownEditor/MarkdownEditor.jsx';
 
 import './App.css';
-
-class Category{
-	constructor(name, color){
-		this.name = name;
-		this.color = color;
-		this.notes = [];
-	}
-
-	getColor(){
-		return `rgb(${this.color.join()})`
-	}
-	static toCategory(object){
-		return Object.assign(new Category(), object);
-	}
-}
 
 const GenerateID = () => new Array(10).fill(undefined).map(() => "QWERTYUIOPASDFGHJKLZXCVBNM".split("")[Math.round(Math.random()*26)]).join("");
 
@@ -38,8 +25,8 @@ function App() {
 
 	useEffect(function (){
 		localStorage.getItem("data") ? setCategories(JSON.parse(localStorage.getItem("data")).map(a => Category.toCategory(a))) : localStorage.setItem("data", JSON.stringify(categories));
-		console.log(JSON.parse(JSON.stringify(categories)).map(a => Category.toCategory(a)));
-	}, [])
+		console.log(JSON.parse(localStorage.getItem("data")).map(a => Category.toCategory(a)));
+	}, []);
 
 	function handleKeyDown(e){
 		if(!(e.key == "Enter" && e.shiftKey)) return;

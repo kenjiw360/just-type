@@ -1,0 +1,65 @@
+.card{
+	background: var(--editor-color);
+	padding: 40px;
+	border: solid 3px var(--editor-border-color);
+	border-radius: 10px;
+	width: 600px;
+}
+
+.card button.submit-button{
+	font-size: 16px;
+	padding: 15px 30px;
+}
+
+.card button.add-category-button{
+	width: 100%;
+	margin: 10px 0px;
+	padding: 15px 0px;
+	display:block;
+}
+
+.card button.add-category-button > svg{
+	font-size: 20px;
+}
+
+.category{
+	display: flex;
+	margin: 20px 0px;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.category > span.left{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.category > span.left > div.color{
+	height: 30px;
+	width: 30px;
+	border-radius: 16px;
+	display: block;
+	margin-right: 7.5px;
+	cursor: pointer;
+}
+
+.category > span.left > span{
+	background: none;
+	border:none;
+	margin: none;
+	outline: none;
+	padding: none;
+	font-size: 16px;
+	white-space: nowrap;
+	cursor:text;
+}
+
+
+.category > span.left > span:empty::before{
+	content: "Type Class Name Here...";
+	opacity: 0.4;
+	font-style: italic;
+	width: 100%;
+}
