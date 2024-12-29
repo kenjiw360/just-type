@@ -7,11 +7,13 @@ import './MarkdownEditor.css';
 var lastThought = null;
 
 export default function MarkdownEditor(props){
-	const [currentCategory, setCurrentCategory] = useState("No Category");
+	const [currentCategory, setCurrentCategory] = useState(props.category);
 	const editorRef = React.useRef();
 
 	function editorChanged(notes){
 		if(notes == '' || notes.split(" ").length < 3){
+			if(currentCategory != "No Category") props.categories.map(category => (category.name == currentCategory) && category.removeNote(props.id));
+			props.setCategories([...props.categories]);
 			setCurrentCategory("No Category");
 			var category = props.categories.filter(category => category.name == "No Category")[0];
 			document.querySelector(`.${props.id}`).style.borderColor = category.getColor();
@@ -24,8 +26,14 @@ export default function MarkdownEditor(props){
 		.then(response => response.json())
 		.then(response => {
 			props.setThinking(false);
+			if(response.bestMatch != currentCategory) props.categories.map(category => (category.name == currentCategory) && category.removeNote(props.id));
 			setCurrentCategory(response.bestMatch);
-			var category = props.categories.filter(category => category.name == response.bestMatch)[0];
+
+			props.categories.map(category => (category.name == response.bestMatch) && category.setNote(props.id, { id: props.id, note: notes, category: response.bestMatch }));
+			localStorage.setItem("data", JSON.stringify(props.categories));
+			props.setCategories([...props.categories]);
+
+			let category = props.categories.filter(category => category.name == response.bestMatch)[0];
 			document.querySelector(`.${props.id}`).style.borderColor = category.getColor();
 			document.querySelector(`.${props.id}`).dataset.category = category.name;
 			if(!lastThought) return;
@@ -34,9 +42,14 @@ export default function MarkdownEditor(props){
 		});
 	}
 
+	useEffect(function (){
+		console.log('this is the note!', props.note);
+		editorRef.current.setMarkdown(props.note);
+	}, []);
+
 	return (
 		<span>
-			<MDXEditor autoFocus={true} ref={editorRef} markdown={props.markdown || ''} suppressHtmlProcessing={true} onChange={editorChanged} plugins={[headingsPlugin(), quotePlugin(), listsPlugin(), thematicBreakPlugin(), linkPlugin(), linkDialogPlugin(), tablePlugin(), markdownShortcutPlugin()]} contentEditableClassName={`editor ${props.id}`} />
+			<MDXEditor autoFocus={true} ref={editorRef} markdown={''} suppressHtmlProcessing={true} onChange={editorChanged} plugins={[headingsPlugin(), quotePlugin(), listsPlugin(), thematicBreakPlugin(), linkPlugin(), linkDialogPlugin(), tablePlugin(), markdownShortcutPlugin()]} contentEditableClassName={`editor ${props.id}`} />
 		</span>
 	)
 }

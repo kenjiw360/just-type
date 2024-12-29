@@ -63,3 +63,7 @@
 	font-style: italic;
 	width: 100%;
 }
+
+input[type="color"]{
+	display:none;
+}
